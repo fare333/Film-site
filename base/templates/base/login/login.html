@@ -1,0 +1,31 @@
+{% load static %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Login<br> Login Page</h2>
+            <p>Login or register from here to access.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form action="" method="POST">
+                {% csrf_token %}
+                  <div class="form-group">
+                     <label>User Name</label>
+                     <input type="text" name="username" class="form-control" placeholder="User Name">
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input type="password" name="password" class="form-control" placeholder="Password">
+                  </div>
+                  <button type="submit" class="btn btn-black">Login</button>
+               </form>
+               <button type="submit" class="btn btn-secondary"><a href="{% url 'register' %}" style="color:white;text-decoration:none;">Register</a></button>
+            </div>
+         </div>
+      </div>

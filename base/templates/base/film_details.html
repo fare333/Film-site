@@ -1,0 +1,43 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <title>{{ film.title }}</title>
+</head>
+<body style="background-color:white;">
+    {% include 'base/navbar.html' %}
+    <div class="container">
+                <h1 class="movie-list-title">{{ film.title }}</h1>
+                        <h2 style="text-align:center;padding:10px">Film name: {{ film.title }}<br>Category:
+                            {{ film.category}}</h2>
+                        {% if film.image %}
+                        <img width="1500" height="350" src="{{ film.image.url }}">
+                        {% endif %}
+                        <br></br>
+                        <h6>Description:<strong> {{ film.description }}</h6>
+                        <br>
+                        <video width='1400' height="400" controls>
+                            <source src='{{ film.video.url }}' type='video/mp4'>
+                        </video>
+                        <br></br>
+                        <h6>Actors:<strong> {{ film.actors }}</h6>
+                    </div>
+
+        <h1>Related movies:</h1>
+        {% for movie in related_movies %}
+        <a href="{% url 'film_detail' movie.id %}">
+            <p style="color:red;text-decoration: none;">{{ movie.title }}</p style="color:white">
+            {% if movie.image %}
+            <img width="200" height="100" src="{{ movie.image.url }}">
+            </a>
+        <hr>
+        {% endif %}
+        {% endfor %}
+</body>

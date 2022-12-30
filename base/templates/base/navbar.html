@@ -1,0 +1,41 @@
+{% load static %}
+<div class="navbar">
+    <div class="navbar-container">
+        <div class="logo-container">
+            <h1 class="logo">flakes</h1>
+        </div>
+        <div class="menu-container">
+            <ul class="menu-list">
+                <li class="menu-list-item active"><a href="/" style="color:white;text-decoration: none;">Home</a></li>
+                <li class="menu-list-item active"><a href="{% url 'categories' %}" style="color:white;text-decoration: none;">Categories</a></li>
+                <li class="menu-list-item"><a href="{% url 'popular_films' %}" style="color:white;text-decoration: none;">Popular</a></li>
+                <li class="menu-list-item"><a href="{% url 'trending_films' %}" style="color:white;text-decoration: none;">Trends</a></li>
+                {% if user.is_authenticated %}
+                <li class="menu-list-item active"><a href="{% url 'logout' %}" style="color:white;text-decoration: none;">Logout</a></li>
+                {% else %}
+                <li class="menu-list-item active"><a href="{% url 'login' %}" style="color:white;text-decoration: none;">Log in</a></li>
+                <li class="menu-list-item active"><a href="{% url 'register' %}" style="color:white;text-decoration: none;">Register</a></li>
+                {% endif %}
+                <li>
+                    <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="profile-container">
+            {% if user.is_authenticated %}
+            <img class="profile-picture" src="{% static 'img/blank.png' %}" alt="">
+            <div class="profile-text-container">
+                <span class="profile-text">{{ request.user.username }}</span>
+            </div>
+            {% else %}
+            <div class="profile-text-container">
+                <span class="profile-text">AnonymusUser</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

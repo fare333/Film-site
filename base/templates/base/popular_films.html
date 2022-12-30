@@ -1,0 +1,42 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <title>Movie Design</title>
+</head>
+<body>
+{% include "base/navbar.html" %}
+<div class="container">
+    <div class="content-container">
+        <div class="featured-content"
+            style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('img/f-1.jpg');">
+            <img class="featured-title" src="{% static 'img/f-t-1.png'%}" alt="">
+            <p class="featured-desc">The best framework ever</p>
+            <button class="featured-button"><a href="https://www.kellton.com/kellton-tech-blog/why-django-web-development-with-python-for-backend-web-development">WATCH</a></button>
+        </div>
+        <div class="movie-list-container">
+            <h1 class="movie-list-title">Popular</h1>
+            <div class="movie-list-wrapper">
+                <div class="movie-list">
+                    {% for film in films %}
+                    <div class="movie-list-item">
+                        <img class="movie-list-item-img" src="{{ film.image.url }}" alt="">
+                        <span class="movie-list-item-title">{{ film.title }}</span>
+                        <p class="movie-list-item-desc">{{ film.description }}</p>
+                        <button class="movie-list-item-button"><a href="{% url 'film_detail' film.id %}">Watch</a></button>
+                </div>
+                {% endfor %}
+                <i class="fas fa-chevron-right arrow"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/app.js'%}"></script>
+</body>
